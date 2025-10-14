@@ -31,7 +31,7 @@
 15.Alter table Employees rename StaffMembers
 	 exec  sp_rename 'Employees', 'StaffMembers'
 16.Drop table Departments
-17.Create table Products (ProductID int Primary Key, ProductName  VARCHAR (100), Category VARCHAR(100), Price DECIMAL(2))
+17.Create table Products (ProductID int Primary Key, ProductName  VARCHAR (100), Category VARCHAR(100), Price DECIMAL(10,2))
 18.Alter table products
 	Add Constraint chk_price_positive
 	Check (price>0)
