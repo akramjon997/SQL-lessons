@@ -38,4 +38,16 @@
 19.Alter Table Products 
 	Add StockQuantity int Default 50
 20.
-21.
+21.insert into Products(ProductId, ProductName, Category, price) values (1, 'TV','Home Appliances', 500) 
+	insert into Products(ProductId, ProductName, Category, price) values (2, 'Bycycle','Toys', 100)
+	insert into Products(ProductId, ProductName, Category, price) values (3, 'Screwdriver','Construction', 10)
+	insert into Products(ProductId, ProductName, Category, price) values (4, 'Portable stove','Camping', 50)
+	insert into Products(ProductId, ProductName, Category, price) values (5, 'Bed Frame','Furniture', 200)
+22.Select * into Products_backup from Products
+23.
+24.Alter table Products
+	Alter column Price float.
+25.Alter Table Products 
+26.Alter table Products
+	Add ProductCode int Identity(1000,5)
+
