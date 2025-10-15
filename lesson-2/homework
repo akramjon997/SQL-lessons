@@ -37,17 +37,16 @@
 	Check (price>0)
 19.Alter Table Products 
 	Add StockQuantity int Default 50
-20.
+20. exec sp_rename 'Categories','ProductCategory.
 21.insert into Products(ProductId, ProductName, Category, price) values (1, 'TV','Home Appliances', 500) 
 	insert into Products(ProductId, ProductName, Category, price) values (2, 'Bycycle','Toys', 100)
 	insert into Products(ProductId, ProductName, Category, price) values (3, 'Screwdriver','Construction', 10)
 	insert into Products(ProductId, ProductName, Category, price) values (4, 'Portable stove','Camping', 50)
 	insert into Products(ProductId, ProductName, Category, price) values (5, 'Bed Frame','Furniture', 200)
 22.Select * into Products_backup from Products
-23.
-24.Alter table Products
+23.Exec sp_rename 'Products','Inventory'
+24.Alter table Inventory
 	Alter column Price float.
-25.Alter Table Products 
-26.Alter table Products
+25.Alter table Inventory
 	Add ProductCode int Identity(1000,5)
 
