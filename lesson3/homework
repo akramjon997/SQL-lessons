@@ -22,7 +22,8 @@ automatically generates numeric values for each new row - usually used for uniqu
 	Foreign key (CategoryID)
 	References Categories(CategoryId)
 13. Primary key automatically creates clustered index, it cannot be Null or have a duplicate. there can be only 1 Primary key on a table.
-On the other hand Unique key creates non-clustered index, it can have one Null value just not duplicates. There can be 1 to many unique key on a table. For email, 
+On the other hand Unique key creates non-clustered index, it can have one Null value just not duplicates.
+There can be 1 to many unique key on a table. For email, 
 username, phone number, etc.
 14.Alter table Products 
 	Add Constraint CK_Price_Positive
@@ -31,4 +32,19 @@ username, phone number, etc.
 	Add Stock int not null default 0
 16.	Update Products
 	Set Price=ISNULL(Price,0)
-17.
+17.A Foreign Key is a constraint used to link two tables together-it ensures thet the value in one table must exist in another.
+It maintains referential integrity between related tables. 
+Foreign key Maintains data comsistency and prevents inserting values that don't exist in the parent table.
+Foreign key ensures that every child record has avalid parent. It also simplifies updating and deleting related data.
+18.CREATE TABLE Customer (
+    CustomerID INT PRIMARY KEY IDENTITY(1,1),
+    FirstName VARCHAR(50) NOT NULL,
+    LastName VARCHAR(50) NOT NULL,
+    Age INT NOT NULL,
+    Email VARCHAR(100),
+    CONSTRAINT chk_Customer_Age CHECK (Age >= 18)
+19.	 Create table Students( StudentID int primary key identity (100,10), 
+	 StudentName varchar (50), 
+	 StudentFaculty varchar(50))
+20.
+
