@@ -46,4 +46,16 @@ Foreign key ensures that every child record has avalid parent. It also simplifie
 19.	 Create table Students( StudentID int primary key identity (100,10), 
 	 StudentName varchar (50), 
 	 StudentFaculty varchar(50))
-20.
+20. Create table OrderDetails
+(OrderId int Not null,
+ProductId int Not Null,
+Quantity int,
+Price Decimal (10,2) , Primary key (OrderID, ProductID))
+21. Null means no value, unknown, or missing data. It cannot be used to compare or perform arithmetic calculations as it means nothing.
+	Coalesce the first non-Null value from a list of expressions. ISNULL replaces a single Null value with specific replacement value.
+	The difference between them Coalesce may have a number of argumentss and used flexible while ISnuul simple and has only 2 arguments.
+22.Create table Employees ( EmpID int Not Null, FirstName varchar (50), LastName varchar (50), Email varchar (50), primary key (EmpID), Unique (Email))
+23. Parent table: Create table Departments( DeptID INT Primary Key, DeptName varchar (100)).
+	Child table with foreign key and cascade options: Create table Employees ( EmpID int Not Null, EmpName varchar(50), DeptID Int, Foreign key (DeptId)
+	References Departments (DeptId)  On Delete Cascade On Update Cascade).
+	 
