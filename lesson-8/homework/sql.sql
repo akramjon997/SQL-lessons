@@ -77,10 +77,43 @@ from Products.
 19.Select top 3 CustomerID, Sum(TotalAmount) as Total_Spent from Invoices
 group by CustomerID
 order by Sum(TotalAmount) desc.
-20.
-21.Select ProductName, count(SaleID) as Number_sold from Products as p
+20.Select district_name, year, population from
+( Select district_name, [2012], [2013] from 
+ ( Select district_name, year, population from city_population) as src
+ pivot
+ (sum(population)
+ for [year] in ([2012], [2013])
+ )
+ As Population_each_Year
+ ) as p
+ unpivot
+ (population for year in ([2012], [2013])) as unp
+ 21.Select ProductName, count(SaleID) as Number_sold from Products as p
 join Sales as s 
 on p.ProductID=s.ProductID
 group by ProductName.
+22. Select year, district_name, population from
+ ( SELECT 
+    year,
+    [Bektemir],
+    [Chilonzor],
+    [Mirobod],
+    [Yakkasaroy],
+    [Yashnobod]
+FROM (
+    SELECT 
+       year,
+        district_name,
+        SUM(population) AS population
+    FROM city_population
+    GROUP BY year, district_name
+) AS src
+PIVOT (
+    SUM(population)
+    FOR district_name IN ([Bektemir], [Chilonzor], [Mirobod], [Yakkasaroy], [Yashnobod])
+) AS PivotTable
+) as src
+unpivot
+(population for district_name in ([Bektemir], [Chilonzor], [Mirobod], [Yakkasaroy], [Yashnobod])) as Unpivote.
 
   
