@@ -18,7 +18,13 @@ from girls as g
 left join Boys as b
 on g.ParentName=b.ParentName
 where b.name is null.
-6.
+6.Select o.custid, o.OrderId, sum((d.unitprice-d.discount)*d.qty) as Total , min(o.freight) as Leastweight 
+from Sales.Orders as o
+join Sales.OrderDetails as d
+on d.orderid=o.orderid
+where o.freight>50
+group by o.custid, o.orderid
+order by custid, orderid.
 7.Select Isnull(C1.Item, ' ') as [Item Cart 1],
 Isnull(C2.Item, ' ')  as [Item Cart2 ]
 from Cart1 as C1
