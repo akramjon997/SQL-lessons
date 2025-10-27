@@ -88,7 +88,9 @@ where c.CategoryName='Electronics' or s.SaleAmount>350.
 16.Select c.CategoryName, count(p.ProductId) as ProductCount
 from Products as p
 right Join Categories as c
-on p.Category=c.CategoryIdSelect concat(c.FirstName,' ', c.LastName) as CustomerName, c.City, o.OrderID, o.TotalAmount as Amount
+on p.Category=c.CategoryId
+    group by c.CategoryName
+17.Select concat(c.FirstName,' ', c.LastName) as CustomerName, c.City, o.OrderID, o.TotalAmount as Amount
 from Customers as c
 join Orders as o
 on c.CustomerId=o.CustomerId
@@ -107,8 +109,4 @@ join Departments as d
 on e.DepartmentId=d.DepartmentId
 where d.DepartmentName in ('Sales', 'Marketing') and e.Salary>60000.
 
-group by c.CategoryName.
-17.
-
-
-
+.
