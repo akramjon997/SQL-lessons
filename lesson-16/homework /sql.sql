@@ -178,4 +178,49 @@ ORDER BY Position;
 2.
 Select * from FindSameCharacters
 where len(Vals)>1
-and Vals = REPLICATE(LEFT(Vals, 1), LEN(Vals))
+and Vals = REPLICATE(LEFT(Vals, 1), LEN(Vals)).
+3.DECLARE @n INT = 5;
+
+WITH NumbersCTE AS (
+    SELECT 
+        1 AS Num,
+        CAST('1' AS VARCHAR(100)) AS SeqString
+    UNION ALL
+    SELECT 
+        Num + 1,
+        SeqString + CAST(Num + 1 AS VARCHAR(10))
+    FROM NumbersCTE
+    WHERE Num < @n
+)
+SELECT Num, SeqString
+FROM NumbersCTE
+OPTION (MAXRECURSION 0).
+4.Select dt.EmployeeId,
+       E.FirstName,
+	   E.LastName,
+	   Dt.TotalSales
+	   from
+(
+    SELECT 
+        EmployeeID,
+        SUM(SalesAmount) AS TotalSales
+    FROM Sales
+    WHERE SaleDate >= DATEADD(MONTH, -6, (Select max(SaleDate) from Sales) )  -- last 6 months
+    GROUP BY EmployeeID
+) AS dt
+join Employees as e
+on e.EmployeeID=dt.EmployeeID.
+5.with cte as
+(Select  distinct PawanName, Pawan_slug_name,
+ LEFT(Pawan_slug_name, CHARINDEX('-', Pawan_slug_name + '-') - 1) AS NamePart,
+        SUBSTRING(Pawan_slug_name, CHARINDEX('-', Pawan_slug_name + '-') + 1, 1000) AS NumPart
+from RemoveDuplicateIntsFromNames)
+
+
+Select  PawanName, Pawan_slug_name, 
+case 
+when Len(NumPart)>1 
+and Numpart<>REPLICATE(LEFT(NumPart,1), LEN(NumPart)) then concat(NamePart,'-' , Numpart)
+else NamePart
+end as final
+from cte.
