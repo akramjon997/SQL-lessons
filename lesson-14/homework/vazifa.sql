@@ -55,6 +55,32 @@ from cte.
 Select ID,concat(reverse(left(Vals,charindex(',', Vals, Charindex(',', Vals)+1)-1)),
 right(vals, charindex(',', Vals))) as Reversed
 from MultipleVals.
-2.
+2.with  abc as (
+Select 1 as n
+union all
+Select n+1
+from abc
+where n<Len('sdgfhsdgfhs@121313131'))
+Select n as Position, Substring('sdgfhsdgfhs@121313131',n,1) as charachter 
+from abc.
 3.Select Player_id, Device_Id , min(event_date) as Event_date from Activity 
-group by Player_id, Device_Id 
+group by Player_id, Device_Id.
+5.DECLARE @str VARCHAR(100) = 'rtcfvty34redt';
+
+WITH N AS (
+    SELECT 1 AS n
+    UNION ALL
+    SELECT n + 1
+    FROM N
+    WHERE n < LEN(@str)
+),
+Split AS (
+    SELECT 
+        SUBSTRING(@str, n, 1) AS ch
+    FROM N
+)
+SELECT
+    STRING_AGG(CASE WHEN ch LIKE '[0-9]' THEN ch END, '') AS NumbersOnly,
+    STRING_AGG(CASE WHEN ch LIKE '[A-Za-z]' THEN ch END, '') AS LettersOnly
+FROM Split
+OPTION (MAXRECURSION 0)
