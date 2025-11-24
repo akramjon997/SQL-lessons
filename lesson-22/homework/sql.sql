@@ -142,7 +142,22 @@ group by id
 
 --23
 
-Selaect * from seats
+With cte as 
+( Select SeatNumber,
+		lag(SeatNumber) over (order by SeatNumber) as PrevSeat
+from Seats),
+gaps as
+(Select PrevSeat+1 as GapStart,
+				SeatNumber-1 as GapEnd from cte
+				where SeatNumber-PrevSeat>1),
+FirstGap as
+(Select 1 as GapStart, 
+		min(SeatNumber)-1 as GapEnd 
+from Seats
+)
+Select * from FirstGap
+union all
+Select * from gaps
 
 
 
